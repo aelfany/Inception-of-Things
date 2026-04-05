@@ -1,30 +1,28 @@
 Vagrant.configure("2") do |config|
   
-  #server machine 
+  # Master Server
   config.vm.define "abelfany" do |debian|
-
     debian.vm.hostname = "abelfanyS"
     debian.vm.box = "bento/debian-12"
-
+    debian.vm.provision "shell", path: "../P1/script/script-Server.sh"
     debian.vm.network "private_network", ip: "192.168.56.110"
     debian.vm.provider "virtualbox" do |vb|
-      vb.memory = "512"
+      vb.memory = "1024" # Increased slightly for K3s stability
       vb.name = "abelfany"
       vb.cpus = 1
     end
   end
-  #server worker machine 
+
+  # Worker Node
   config.vm.define "kacem" do |ubuntu|
-
-    ubuntu.vm.box = "ubuntu/trusty64"
+    ubuntu.vm.box = "ubuntu/jammy64"
     ubuntu.vm.hostname = "kacemS"
-
+    ubuntu.vm.provision "shell", path: "../P1/script/script-Worker.sh"
     ubuntu.vm.network "private_network", ip: "192.168.56.111"
     ubuntu.vm.provider "virtualbox" do |vb|
-      vb.memory = "512"
+      vb.memory = "1024"
       vb.name = "kacem"
       vb.cpus = 1
     end
   end
-
 end
