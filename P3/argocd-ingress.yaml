@@ -4,9 +4,11 @@ metadata:
   name: argocd-server-ingress
   namespace: argocd
   annotations:
+    # This is critical for ArgoCD because it uses TLS internally
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
 spec:
-  ingressClassName: nginx
+  ingressClassName: nginx # This matches the controller we just installed
   rules:
   - host: argocd.local
     http:
