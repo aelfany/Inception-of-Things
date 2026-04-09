@@ -26,9 +26,9 @@ if sudo swapon --show | grep -q '^'; then
 fi
 
 if [ -f "/usr/local/bin/k3s" ]; then
-    message_Info "K3s is Already Installed ✅"
+    message_Info "K3s is Already Installed"
 else
-    message_Info "⬇️ Start Downloading K3s Agent"
+    message_Info "Start Downloading K3s Agent"
 
     while [ ! -f /vagrant/token.txt ]; do
         message_Info "Waiting for /vagrant/token.txt from master server..."
@@ -46,5 +46,5 @@ else
 
     curl -sfL https://get.k3s.io | K3S_URL=https://192.168.56.110:6443 K3S_TOKEN=$TOKEN sh -
 
-    message_Info "✅ K3s Agent Installation Completed"
+    message_Info "K3s Agent Installation Completed"
 fi
