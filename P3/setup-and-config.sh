@@ -33,6 +33,10 @@ rm argocd-linux-amd64
 kubectl apply -f argocd-ingress.yaml
 kubectl apply -f nginx.yaml
 
-argocd login argocd.local --username admin --password $(cat password.txt) --insecure
+# sudo sh -c "grep -q '127.0.0.1 argocd.local' /etc/hosts || echo '127.0.0.1 argocd.local' >> /etc/hosts"
+
+# sleep 5
+
+# argocd login argocd.local --username admin --password $(cat password.txt) --insecure
 
 echo -e "\nSuccess! Everything is built, running, and authenticated!"
