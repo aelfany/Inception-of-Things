@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: app1
-        image: abelfany/app1:v3
+        image: abelfany/app1:v2
         ports:
         - containerPort: 80
 ---
