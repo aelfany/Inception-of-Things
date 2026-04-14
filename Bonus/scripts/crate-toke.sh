@@ -16,4 +16,4 @@ if token.nil?
 end
 
 puts token.token
-" > ~/test/scripts/token.txt
+" > ~/Inception-of-Things/Bonus/scripts/token.txt

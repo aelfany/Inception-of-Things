@@ -3,11 +3,11 @@
 set -e
 
 DOMAIN=$(kubectl get ingress gitlab-webservice-default -n gitlab -o jsonpath='{.spec.rules[0].host}')
-TOKEN=$(tail -n 1 ~/test/scripts/token.txt | tr -d '\n')
+TOKEN=$(tail -n 1 ~/Inception-of-Things/Bonus/scripts/token.txt | tr -d '\n')
 
 REPO="root/abelfany.git"
 
-cd ~/test/confs/dev
+cd ~/Inception-of-Things/Bonus/confs/dev
 
 git config --global http.sslVerify false
 

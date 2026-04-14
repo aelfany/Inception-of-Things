@@ -1,7 +1,7 @@
 global:
   edition: ce
   hosts:
-    domain: local  # <--- Change this to just 'local'
+    domain: local
     https: false
   ingress:
     enabled: true
@@ -15,7 +15,6 @@ global:
   grafana:
     enabled: false
 
-# unnecessary components
 installCertmanager: false
 
 nginx-ingress:
@@ -30,7 +29,6 @@ registry:
 gitlab-runner:
   install: false
 
-# GitLab core components
 gitlab:
   gitlab-exporter:
     enabled: false
@@ -75,7 +73,6 @@ gitlab:
         memory: 512Mi
         cpu: 500m
 
-# Dependencies with minimal resources
 postgresql:
   install: true
   primary:

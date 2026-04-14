@@ -32,7 +32,6 @@ done
 
 ROOT_PASSWORD=$(kubectl get secret gitlab-gitlab-initial-root-password -n gitlab -o jsonpath="{.data.password}" | base64 --decode)
 
-echo "$ROOT_PASSWORD" > git-pass.txt
 echo "🔗 URL: http://gitlab.local"
 
 kubectl get secret gitlab-gitlab-initial-root-password -n gitlab -o jsonpath="{.data.password}" | base64 --decode > git-pass.txt
