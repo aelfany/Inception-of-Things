@@ -4,11 +4,11 @@ metadata:
   name: nginx
   namespace: argocd
 spec:
-  project: default
+  project: default  # <--- This is the missing line!
   source:
     repoURL: 'http://gitlab-webservice-default.gitlab.svc.cluster.local:8181/root/abelfany.git'
     path: overlays
-    targetRevision: main  # <--- Ensure this is "main"
+    targetRevision: main
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: default
@@ -16,7 +16,6 @@ spec:
     automated:
       selfHeal: true
       prune: true
-
 
 # apiVersion: argoproj.io/v1alpha1
 # kind: Application

@@ -1,25 +1,26 @@
 #!/bin/bash
 
-cd ~/test/scripts/argo
+set -e
 
-git init
+DOMAIN=$(kubectl get ingress gitlab-webservice-default -n gitlab -o jsonpath='{.spec.rules[0].host}')
+TOKEN=$(tail -n 1 ~/test/scripts/token.txt | tr -d '\n')
 
-git config credential.helper ""
-git config http.sslVerify false
+REPO="root/abelfany.git"
 
-git remote remove origin 2>/dev/null 
-git remote add origin https://root:glpat -MASTER-TOKEN-2026-TOKEN@gitlab.192.168.56.112.gitlab/root/abelfany.git
+cd ~/test/confs/dev
 
-git config user.email "you@example.com"
-git config user.name "Your Name"
+git config --global http.sslVerify false
 
-git branch -M main
+if [ ! -d ".git" ]; then
+  git init
+  git config user.email "abd@example.com"
+  git config user.name "Abdellatif"
+  git branch -M main
+  git remote add origin "https://oauth2:${TOKEN}@${DOMAIN}/${REPO}"
+else
+  git remote set-url origin "https://oauth2:${TOKEN}@${DOMAIN}/${REPO}"
+fi
 
 git add .
-git commit -m "Initial automated push" || true
-
-echo "🚀 Pushing to local GitLab over HTTPS..."
+git diff --cached --quiet || git commit -m "update"
 git push -u origin main
-
-kubectl apply -f ../confs/Application.yaml
-kubectl apply -f ../confs/gitlab-repo-secret.yaml

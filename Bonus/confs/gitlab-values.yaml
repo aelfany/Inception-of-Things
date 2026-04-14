@@ -1,17 +1,12 @@
 global:
   edition: ce
-
   hosts:
-    # Changed from localhost to 192.168.56.112.gitlab
-    # This ensures internal links don't break when accessed from Windows
-    domain: 192.168.56.112.gitlab
+    domain: local  # <--- Change this to just 'local'
     https: false
-
   ingress:
     enabled: true
     class: nginx
     configureCertmanager: false
-    # Added to handle the hostname correctly
     path: /
 
   kas:

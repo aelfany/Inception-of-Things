@@ -1,4 +1,6 @@
 #!/bin/bash
+# Fetch the Public IP automatically
+PUBLIC_IP=$(curl -s ifconfig.me)
 
 sg docker -c "k3d cluster create my-gitops-cluster \
   -p '80:80@loadbalancer' \
@@ -32,4 +34,12 @@ rm argocd-linux-amd64
 
 kubectl apply -f ../confs/argocd-ingress.yaml
 
+
+echo "------------------------------------------------------"
+echo "DEVOPS READY: DigitalOcean Edition"
+echo "Public IP: $PUBLIC_IP"
+echo "Add these to your Windows C:\Windows\System32\drivers\etc\hosts:"
+echo "$PUBLIC_IP  gitlab.local"
+echo "$PUBLIC_IP  argocd.local"
+echo "------------------------------------------------------"
 echo -e "\nSuccess! Everything is built, running, and authenticated!"
