@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/aelfany/agro'
+    repoURL: 'http://gitlab-webservice-default.gitlab.svc.cluster.local:8181/root/abelfany.git'
     path: overlays
-    targetRevision: main
+    targetRevision: main  # <--- Ensure this is "main"
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: default
@@ -16,4 +16,24 @@ spec:
     automated:
       selfHeal: true
       prune: true
+
+
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: nginx
+#   namespace: argocd
+# spec:
+#   project: default
+#   source:
+#     repoURL: 'https://github.com/aelfany/agro'
+#     path: overlays
+#     targetRevision: main
+#   destination:
+#     server: 'https://kubernetes.default.svc'
+#     namespace: default
+#   syncPolicy:
+#     automated:
+#       selfHeal: true
+#       prune: true
 

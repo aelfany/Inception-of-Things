@@ -9,7 +9,7 @@ message_Info() {
 }
 
 message_Info "--- Starting K3s Setup on Debian ---"
-
+ 
 message_Info "Updating packages..."
 sudo apt-get update && sudo apt-get upgrade -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
 

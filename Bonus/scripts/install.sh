@@ -15,6 +15,5 @@ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 rm kubectl
 
 curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
-
+    
 echo "Installation complete! Reloading shell so Docker works without sudo..."
-# exec newgrp docker

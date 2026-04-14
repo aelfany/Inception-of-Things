@@ -1,0 +1,114 @@
+global:
+  edition: ce
+
+  hosts:
+    # Changed from localhost to 192.168.56.112.gitlab
+    # This ensures internal links don't break when accessed from Windows
+    domain: 192.168.56.112.gitlab
+    https: false
+
+  ingress:
+    enabled: true
+    class: nginx
+    configureCertmanager: false
+    # Added to handle the hostname correctly
+    path: /
+
+  kas:
+    enabled: false
+
+  grafana:
+    enabled: false
+
+# unnecessary components
+installCertmanager: false
+
+nginx-ingress:
+  enabled: false
+
+prometheus:
+  install: false
+
+registry:
+  enabled: false
+
+gitlab-runner:
+  install: false
+
+# GitLab core components
+gitlab:
+  gitlab-exporter:
+    enabled: false
+  mailroom:
+    enabled: false
+  gitlab-shell:
+    minReplicas: 1
+    maxReplicas: 1
+    resources:
+      requests:
+        memory: 64Mi
+        cpu: 50m
+      limits:
+        memory: 128Mi
+        cpu: 100m
+  webservice:
+    minReplicas: 1
+    maxReplicas: 1
+    resources:
+      requests:
+        memory: 1Gi
+        cpu: 300m
+      limits:
+        memory: 2Gi
+        cpu: 1
+  sidekiq:
+    minReplicas: 1
+    maxReplicas: 1
+    resources:
+      requests:
+        memory: 512Mi
+        cpu: 250m
+      limits:
+        memory: 1Gi
+        cpu: 500m
+  gitaly:
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: 200m
+      limits:
+        memory: 512Mi
+        cpu: 500m
+
+# Dependencies with minimal resources
+postgresql:
+  install: true
+  primary:
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: 200m
+      limits:
+        memory: 512Mi
+        cpu: 500m
+
+redis:
+  install: true
+  master:
+    resources:
+      requests:
+        memory: 128Mi
+        cpu: 100m
+      limits:
+        memory: 256Mi
+        cpu: 200m
+
+minio:
+  resources:
+    requests:
+      memory: 128Mi
+      cpu: 100m
+    limits:
+      memory: 256Mi
+      cpu: 200m
+

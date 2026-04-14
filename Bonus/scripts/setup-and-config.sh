@@ -30,13 +30,6 @@ curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/lat
 sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
 rm argocd-linux-amd64
 
-kubectl apply -f argocd-ingress.yaml
-kubectl apply -f nginx.yaml
-
-# sudo sh -c "grep -q '127.0.0.1 argocd.local' /etc/hosts || echo '127.0.0.1 argocd.local' >> /etc/hosts"
-
-# sleep 5
-
-# argocd login argocd.local --username admin --password $(cat password.txt) --insecure
+kubectl apply -f ../confs/argocd-ingress.yaml
 
 echo -e "\nSuccess! Everything is built, running, and authenticated!"
