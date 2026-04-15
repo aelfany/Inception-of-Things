@@ -23,7 +23,11 @@ Vagrant.configure("2") do |config|
     server.vm.network "forwarded_port", guest: 443, host: 443
     # Keep 8080 just in case you need direct API access
     server.vm.network "forwarded_port", guest: 8080, host: 8080
-
+    server.vm.synced_folder ".", "/home/vagrant/shared", 
+    owner: "vagrant", 
+    group: "vagrant", 
+    mount_options: ["dmode=775,fmode=664"]
+    
     server.vm.provider "virtualbox" do |vb|
       vb.memory = 2048 
       vb.name = "work"

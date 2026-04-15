@@ -17,6 +17,8 @@ kubectl create namespace dev
 
 kubectl apply -n argocd --server-side -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
+kubectl patch configmap argocd-cmd-params-cm -n argocd -p '{"data": {"server.insecure": "true"}}'
+kubectl rollout restart deployment argocd-server -n argocd
 
 while [[ $(kubectl get pods -n argocd --no-headers | grep -v "Running" | wc -l) -gt 0 ]] || \
       [[ $(kubectl get pods -n argocd --no-headers | awk '{print $2}' | grep -v "1/1" | wc -l) -gt 0 ]]; do
@@ -30,13 +32,7 @@ curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/lat
 sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
 rm argocd-linux-amd64
 
-kubectl apply -f argocd-ingress.yaml
-kubectl apply -f nginx.yaml
-
-# sudo sh -c "grep -q '127.0.0.1 argocd.local' /etc/hosts || echo '127.0.0.1 argocd.local' >> /etc/hosts"
-
-# sleep 5
-
-# argocd login argocd.local --username admin --password $(cat password.txt) --insecure
+kubectl apply -f ../confs/Application.yaml
+kubectl apply -f ../confs/argocd-ingress.yaml
 
 echo -e "\nSuccess! Everything is built, running, and authenticated!"

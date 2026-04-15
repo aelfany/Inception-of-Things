@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/aelfany/agro'
+    repoURL: 'https://github.com/aelfany/ael-kace'
     path: overlays
     targetRevision: main
   destination:
