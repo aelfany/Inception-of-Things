@@ -15,5 +15,4 @@ echo "alias k='kubectl'" >> /home/vagrant/.bashrc
 # Ensure the vagrant user can find the config by default
 echo "export KUBECONFIG=/etc/rancher/k3s/k3s.yaml" >> /home/vagrant/.bashrc
 
-kubectl apply -f /vagrant/deployments
-kubectl apply -f /vagrant/ingress
+kubectl apply -f /vagrant/confs

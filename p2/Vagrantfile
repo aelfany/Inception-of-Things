@@ -2,7 +2,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "hashicorp-education/ubuntu-24-04"
   config.vm.box_version = "0.1.0"
   config.vm.define "ael-kaceS" do |server| 
-    server.vm.hostname = "S.ael-kace"
+    server.vm.hostname = "ael-kaceS"
     server.vm.provider "virtualbox" do |vb|
       vb.name = "ael-kace.s"
       vb.memory = "2048"
