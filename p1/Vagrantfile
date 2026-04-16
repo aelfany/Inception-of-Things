@@ -1,29 +1,25 @@
 Vagrant.configure("2") do |config|
     config.vm.box = "ubuntu/focal64"
     
-    # K3s Server
-    config.vm.define "ilasrarfS" do |server|
+    config.vm.define "ilasrarf" do |server|
         server.vm.hostname = "ilasrarfS"
+        server.vm.provision "shell", path: "scripts/install_k3s_server.sh"
         server.vm.network "private_network", ip: "192.168.56.110"
         server.vm.provider "virtualbox" do |vb|
-            vb.name = "ilasrarfS"
+            vb.name = "ilasrarf"
             vb.memory = "2024"
             vb.cpus = "2"
         end
-        # Use server.vm.provision NOT config.vm.provision
-        server.vm.provision "shell", path: "scripts/install_k3s_server.sh"
     end
     
-    # K3s Worker
-    config.vm.define "ilasrarfSW" do |worker|   
-        worker.vm.hostname = "ilasrarfSW"
+    config.vm.define "abelfany" do |worker|   
+        worker.vm.hostname = "abelfanySW"
+        worker.vm.provision "shell", path: "scripts/install_k3s_worker.sh"
         worker.vm.network "private_network", ip: "192.168.56.111"
         worker.vm.provider "virtualbox" do |vb|
-            vb.name = "ilasrarfSW"
+            vb.name = "abelfany"
             vb.memory = "2024"
             vb.cpus = "2"
         end
-        # Use worker.vm.provision NOT config.vm.provision
-        worker.vm.provision "shell", path: "scripts/install_k3s_worker.sh"
     end
 end
