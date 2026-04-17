@@ -1,25 +1,27 @@
 Vagrant.configure("2") do |config|
-    config.vm.box = "ubuntu/focal64"
-    
-    config.vm.define "ilasrarf" do |server|
-        server.vm.hostname = "ilasrarfS"
-        server.vm.provision "shell", path: "scripts/install_k3s_server.sh"
-        server.vm.network "private_network", ip: "192.168.56.110"
-        server.vm.provider "virtualbox" do |vb|
-            vb.name = "ilasrarf"
-            vb.memory = "2024"
-            vb.cpus = "2"
-        end
+  
+  # Master Server
+  config.vm.define "abelfanyS" do |debian|
+    debian.vm.hostname = "abelfanyS"
+    debian.vm.box = "bento/debian-12"
+    debian.vm.provision "shell", path: "scripts/script-Server.sh"
+    debian.vm.network "private_network", ip: "192.168.56.110"
+    debian.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024" 
+      vb.name = "abelfany"
+      vb.cpus = 1
     end
-    
-    config.vm.define "abelfany" do |worker|   
-        worker.vm.hostname = "abelfanySW"
-        worker.vm.provision "shell", path: "scripts/install_k3s_worker.sh"
-        worker.vm.network "private_network", ip: "192.168.56.111"
-        worker.vm.provider "virtualbox" do |vb|
-            vb.name = "abelfany"
-            vb.memory = "2024"
-            vb.cpus = "2"
-        end
+  end
+
+  config.vm.define "ael-kaceS" do |ubuntu|
+    ubuntu.vm.box = "ubuntu/jammy64"
+    ubuntu.vm.hostname = "ael-kaceS"
+    ubuntu.vm.provision "shell", path: "scripts/script-Worker.sh"
+    ubuntu.vm.network "private_network", ip: "192.168.56.111"
+    ubuntu.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+      vb.name = "ael-kace"
+      vb.cpus = 1
     end
+  end
 end
