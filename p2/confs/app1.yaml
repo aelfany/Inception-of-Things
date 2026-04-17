@@ -28,6 +28,6 @@ spec:
         - name: app-one
           image: hashicorp/http-echo
           args:
-            - "-text=Hello From App1 by Kacimo!"
+            - "-text=Hello From App1"
           ports:
             - containerPort: 5678
