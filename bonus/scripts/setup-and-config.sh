@@ -12,6 +12,8 @@ kubectl wait --namespace ingress-nginx \
   --selector=app.kubernetes.io/component=controller \
   --timeout=120s
 
+kubectl patch deploy ingress-nginx-controller -n ingress-nginx --type json -p '[{"op":"add","path":"/spec/template/spec/containers/0/args/-","value":"--enable-ssl-passthrough"}]'
+
 kubectl create namespace argocd
 kubectl create namespace dev
 
