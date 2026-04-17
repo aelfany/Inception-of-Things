@@ -12,13 +12,13 @@ kubectl wait --namespace ingress-nginx \
   --selector=app.kubernetes.io/component=controller \
   --timeout=120s
 
+kubectl rollout restart deployment argocd-server -n argocd
+
 kubectl create namespace argocd
 kubectl create namespace dev
 
 kubectl apply -n argocd --server-side -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
-kubectl patch configmap argocd-cmd-params-cm -n argocd -p '{"data": {"server.insecure": "true"}}'
-kubectl rollout restart deployment argocd-server -n argocd
 
 while [[ $(kubectl get pods -n argocd --no-headers | grep -v "Running" | wc -l) -gt 0 ]] || \
       [[ $(kubectl get pods -n argocd --no-headers | awk '{print $2}' | grep -v "1/1" | wc -l) -gt 0 ]]; do
