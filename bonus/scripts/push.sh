@@ -3,11 +3,11 @@
 set -e
 
 DOMAIN=$(kubectl get ingress gitlab-webservice-default -n gitlab -o jsonpath='{.spec.rules[0].host}')
-TOKEN=$(tail -n 1 ~/Inception-of-Things/Bonus/scripts/token.txt | tr -d '\n')
+TOKEN=$(tail -n 1 ~/Inception-of-Things/bonus/scripts/token.txt | tr -d '\n')
 
 REPO="root/abelfany.git"
 
-cd ~/Inception-of-Things/Bonus/confs/dev
+cd ~/Inception-of-Things/bonus/confs/dev
 
 git config --global http.sslVerify false
 
@@ -22,5 +22,9 @@ else
 fi
 
 git add .
-git diff --cached --quiet || git commit -m "update"
+git diff --cached --quiet || git commit -m "update from digital"
 git push -u origin main
+
+
+kubectl apply -f /root/Inception-of-Things/bonus/confs/Application.yaml
+kubectl apply -f /root/Inception-of-Things/bonus/confs/gitlab-repo-secret.yaml

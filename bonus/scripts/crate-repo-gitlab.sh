@@ -1,7 +1,7 @@
 #!/bin/bash
 
 GITLAB_DOMAIN=$(kubectl get ingress gitlab-webservice-default -n gitlab -o jsonpath='{.spec.rules[0].host}')
-TOKEN=$(cat ~/Inception-of-Things/Bonus/scripts/token.txt)
+TOKEN=$(cat ~/Inception-of-Things/bonus/scripts/token.txt)
 
 grep -q "$GITLAB_DOMAIN" /etc/hosts || sudo sh -c "echo '127.0.0.1 $GITLAB_DOMAIN' >> /etc/hosts"
 
