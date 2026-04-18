@@ -36,3 +36,8 @@ kubectl apply -f ../confs/Application.yaml
 kubectl apply -f ../confs/argocd-ingress.yaml
 
 echo -e "\nSuccess! Everything is built, running, and authenticated!"
+
+
+
+# You shouldn’t keep getting upset over things like the weather Weather is just weather
+# Whether you’re upset or not, whether you like it or not it doesn’t care
